@@ -1,26 +1,24 @@
 <%--
   Created by IntelliJ IDEA.
   User: trolo
-  Date: 11/25/2020
-  Time: 12:33 PM
+  Date: 12/3/2020
+  Time: 10:24 AM
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <form action="ViewController" method="get">
+<head>
+    <title>Title</title>
+</head>
+<body>
+<form action="ViewController" method="get">
+    Registration<br>
     <input type="hidden" name="command" value="forward">
-    enter login <br>
+    enter your login <br>
     <input type="text" name="login" value=""><br>
-    enter password: <br>
+    enter your password: <br>
     <input type="password" name="password" value=""><br>
     <input type="submit" value="Отправить">
-    or<br>
-  </form>
-  <form action="ForwardRegistrationController" method="post">
-    <input type="submit" value="Регистрация">
-  </form>
+</form>
+</body>
 </html>
