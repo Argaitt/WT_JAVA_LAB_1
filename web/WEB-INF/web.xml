@@ -4,19 +4,19 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
   <servlet>
-      <servlet-name>ViewController</servlet-name>
+      <servlet-name>AutorizationController</servlet-name>
       <servlet-class>phonestation.view.AutorizationController</servlet-class>
   </servlet>
   <servlet-mapping>
-      <servlet-name>ViewController</servlet-name>
-      <url-pattern>/ViewController</url-pattern>
+      <servlet-name>AutorizationController</servlet-name>
+      <url-pattern>/AutorizationController</url-pattern>
   </servlet-mapping>
   <servlet>
-      <servlet-name>ForwardRegistrationController</servlet-name>
-      <servlet-class>phonestation.view.ForwardRegistrationController</servlet-class>
+      <servlet-name>RegistrationController</servlet-name>
+      <servlet-class>phonestation.view.RegistrationController</servlet-class>
   </servlet>
   <servlet-mapping>
-      <servlet-name>ForwardRegistrationController</servlet-name>
-      <url-pattern>/ForwardRegistrationController</url-pattern>
-  </servlet-mapping>
+      <servlet-name>RegistrationController</servlet-name>
+      <url-pattern>/RegistrationController</url-pattern>
+  </servlet-mapping>  
 </web-app>

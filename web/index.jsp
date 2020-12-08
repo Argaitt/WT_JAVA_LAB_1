@@ -11,16 +11,24 @@
   <head>
     <title>$Title$</title>
   </head>
-  <form action="ViewController" method="get">
+  <fieldset>
+  <form action="AutorizationController" method="get">
     <input type="hidden" name="command" value="forward">
     enter login <br>
     <input type="text" name="login" value=""><br>
     enter password: <br>
     <input type="password" name="password" value=""><br>
-    <input type="submit" value="Отправить">
-    or<br>
+    <input type="submit" value="Авторизация">
   </form>
-  <form action="ForwardRegistrationController" method="post">
+  </fieldset>
+  <br>
+  <fieldset>
+  <form action="RegistrationController" method="get">
+    enter login <br>
+    <input type="text" name="login" value=""><br>
+    enter password: <br>
+    <input type="password" name="password" value=""><br>
     <input type="submit" value="Регистрация">
   </form>
+  </fieldset>
 </html>
