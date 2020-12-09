@@ -47,20 +47,33 @@ public class SQLUserDAO implements UserDAO {
     }
 
     @Override
-    public void Registration(User user) throws DAOException {
+    public String Registration(User user) throws DAOException {
         try {
             String url = "jdbc:mysql://localhost:3306/lab1_wt?serverTimezone=Europe/Moscow&useSSL=false";
             String loginDB = "root";
             String passwordDB = "root";
             Class.forName("org.gjt.mm.mysql.Driver");
             Connection connection = DriverManager.getConnection(url,loginDB,passwordDB);
+            String sqlCommandSELECT = "SELECT * FROM users";
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT users(login, password) VALUES ('testlogin', 'testpassword')");
-
+            ResultSet resultSet = statement.executeQuery(sqlCommandSELECT);
+            while (resultSet.next()){
+                String etalonLogin = resultSet.getString("login");
+                if (!etalonLogin.equals(user.GetLogin())){
+                    continue;
+                }
+                statement.close();
+                return "this login already exixts";
+            }
+            statement.executeUpdate("INSERT users(login, password) VALUES ('"+ user.GetLogin() +"', '"+ user.GetPassword() +"')");
+            statement.close();
+            return "sucessfull registration";
         }catch (SQLException e){
             System.out.println("DB connection error");
+            return null;
         }catch (ClassNotFoundException e){
             System.out.println("Class register error");
+            return null;
         }
     }
 }

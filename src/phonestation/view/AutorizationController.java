@@ -25,15 +25,20 @@ public class AutorizationController extends HttpServlet {
         ControllerFactory controllerFactory = ControllerFactory.GetInstance();
         Controller controller = controllerFactory.GetController();
         String controllerResponce = controller.ExexuteTesk(command);
+        response.setContentType("text/html");
         java.io.PrintWriter out = response.getWriter();
         if (controllerResponce == null){
             out.println("access denied");
         }else {
             String[] subStr = controllerResponce.split(delimeter);
             out.println("Hi" + delimeter + subStr[0]);
+            out.println("<br>");
             out.println("Base functions" + delimeter + subStr[2]);
+            out.println("<br>");
             out.println("IPPhone" + delimeter +  subStr[3]);
+            out.println("<br>");
             out.println("Custom alarm" + delimeter +  subStr[4]);
+            out.println("<br>");
             out.println("Hide number" + delimeter + subStr[5]);
         }
 

@@ -22,8 +22,13 @@ public class RegistrationController extends HttpServlet {
         ControllerFactory controllerFactory = ControllerFactory.GetInstance();
         Controller controller = controllerFactory.GetController();
         String controllerResponce = controller.ExexuteTesk(command);
+        resp.setContentType("text/html");
         java.io.PrintWriter out = resp.getWriter();
-        out.println(controllerResponce);
+        if (controllerResponce == null){
+            out.println("this login is already exists");
+        }else{
+            out.println("registrations sucessfull");
+        }
     }
 
     @Override
