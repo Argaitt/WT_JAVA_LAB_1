@@ -4,6 +4,6 @@ import phonestation.dao.exception.DAOException;
 
 
 public interface UserDAO {
-    void SignIN(String login, String password) throws DAOException;
+    User SignIN(String login, String password) throws DAOException;
     void Registration(User user) throws DAOException;
 }
