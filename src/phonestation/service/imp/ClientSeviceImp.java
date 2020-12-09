@@ -11,14 +11,23 @@ import java.util.regex.Pattern;
 
 public class ClientSeviceImp implements ClientService {
     @Override
-    public void SignIn(String login, String password) throws ServiceException{
+    public User SignIn(String login, String password) throws ServiceException{
         if (login == null || login.isEmpty()){
             throw new ServiceException("incorrect login");
         }
         try {
             DAOFactory daoObjectFactory = DAOFactory.GetInstance();
             UserDAO userDAO = daoObjectFactory.GetUserDAO();
-            userDAO.SignIN(login, password);
+            User user = userDAO.SignIN(login, password);
+            if (user == null){
+                return null;
+            }else {
+                if (user.GetPassword().equals(password)){
+                    return user;
+                }else {
+                    return null;
+                }
+            }
         }catch (Exception e){
             throw new ServiceException(e);
         }

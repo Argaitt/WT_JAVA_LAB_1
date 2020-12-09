@@ -39,7 +39,7 @@ public class User {
     public boolean GetCustomAlarm(){
         return customAlarm;
     }
-    public  void SetCustomAlarm(boolean hideNumber){
+    public  void SetCustomAlarm(boolean customAlarm){
         this.customAlarm = customAlarm;
     }
 

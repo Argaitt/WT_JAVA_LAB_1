@@ -1,5 +1,6 @@
 package phonestation.controller.command.imp;
 import phonestation.GlobalVariables;
+import phonestation.bean.User;
 import phonestation.controller.command.Command;
 import phonestation.service.ClientService;
 import phonestation.service.exception.ServiceException;
@@ -18,7 +19,13 @@ public class SingIn implements Command {
         try {
             login = subStrings[1];
             password = subStrings[2];
-            clientService.SignIn(login,password);
+            User user = clientService.SignIn(login,password);
+            if (user == null){
+                response = null;
+            }else {
+                response = user.GetLogin() + delimiter + user.GetPassword() + delimiter + user.GetBaseFunctions() + delimiter +
+                        user.GetipPhone() + delimiter + user.GetCustomAlarm() + delimiter + user.GetHideNumber();
+            }
         }catch (ServiceException e){
             response = "error during login procedure";
         }

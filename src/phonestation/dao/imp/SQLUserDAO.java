@@ -33,9 +33,10 @@ public class SQLUserDAO implements UserDAO {
                 user.SetCustomAlarm(resultSet.getBoolean("customAlarm"));
                 user.SetHideNumber(resultSet.getBoolean("hideNumber"));
                 user.SetipPhone(resultSet.getBoolean("ipPhone"));
+                statement.close();
                 return user;
             }
-            return user;
+            return null;
         } catch (ClassNotFoundException e) {
             System.out.println("error register class");
             return null;
@@ -48,12 +49,13 @@ public class SQLUserDAO implements UserDAO {
     @Override
     public void Registration(User user) throws DAOException {
         try {
-            String url = "jdbc:mysql://localhost:3306/users?serverTimezone=Europe/Moscow&useSSL=false";
+            String url = "jdbc:mysql://localhost:3306/lab1_wt?serverTimezone=Europe/Moscow&useSSL=false";
             String loginDB = "root";
             String passwordDB = "root";
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.gjt.mm.mysql.Driver");
             Connection connection = DriverManager.getConnection(url,loginDB,passwordDB);
             Statement statement = connection.createStatement();
+            statement.executeUpdate("INSERT users(login, password) VALUES ('testlogin', 'testpassword')");
 
         }catch (SQLException e){
             System.out.println("DB connection error");

@@ -10,6 +10,9 @@ import javax.servlet.ServletException;
 import phonestation.controller.Controller;
 import phonestation.controller.factory.ControllerFactory;
 import phonestation.dao.factory.DAOFactory;
+import phonestation.GlobalVariables;
+
+import static phonestation.GlobalVariables.delimeter;
 
 public class AutorizationController extends HttpServlet {
     private static final long serialVersionUID = 1l;
@@ -23,7 +26,17 @@ public class AutorizationController extends HttpServlet {
         Controller controller = controllerFactory.GetController();
         String controllerResponce = controller.ExexuteTesk(command);
         java.io.PrintWriter out = response.getWriter();
-        out.println(controllerResponce);
+        if (controllerResponce == null){
+            out.println("access denied");
+        }else {
+            String[] subStr = controllerResponce.split(delimeter);
+            out.println("Hi" + delimeter + subStr[0]);
+            out.println("Base functions" + delimeter + subStr[2]);
+            out.println("IPPhone" + delimeter +  subStr[3]);
+            out.println("Custom alarm" + delimeter +  subStr[4]);
+            out.println("Hide number" + delimeter + subStr[5]);
+        }
+
     }
 
     protected void  doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
