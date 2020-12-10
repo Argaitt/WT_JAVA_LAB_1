@@ -31,15 +31,41 @@ public class AutorizationController extends HttpServlet {
             out.println("access denied");
         }else {
             String[] subStr = controllerResponce.split(delimeter);
-            out.println("Hi" + delimeter + subStr[0]);
-            out.println("<br>");
-            out.println("Base functions" + delimeter + subStr[2]);
-            out.println("<br>");
-            out.println("IPPhone" + delimeter +  subStr[3]);
-            out.println("<br>");
-            out.println("Custom alarm" + delimeter +  subStr[4]);
-            out.println("<br>");
-            out.println("Hide number" + delimeter + subStr[5]);
+            out.print(
+                    "<html>\n" +
+                    "  <head>\n" +
+                    "    <title>UrAccount</title>\n" +
+                    "  </head>\n" +
+
+                    "  <br>\n" +
+                    "  <fieldset>\n" +
+                    "  </fieldset>\n" +
+                    "  <fieldset>\n" +
+                    "  <form action=\"AccountController\" method=\"get\">\n" +
+                    "        <input type=\"submit\" value=\"Complete\">\n" + "<br>" +
+                            "        <input type=\"checkbox\" name=\"Base_functions\" value=\"\"><br>\n" +
+                            "           <label for=\"Base_functions\">Base functions</label>\n" + "<br>" +
+                            "        <input type=\"checkbox\" name=\"IPPhone\" value=\"\"><br>\n" +
+                            "           <label for=\"IPPhone\">IPPhone</label>\n" + "<br>" +
+                            "        <input type=\"checkbox\" name=\"Custom_alarm\" value=\"\"><br>\n" +
+                            "           <label for=\"Custom_alarm\">Custom alarm</label>\n" + "<br>" +
+                            "        <input type=\"checkbox\" name=\"Hide_number\" value=\"\"><br>\n" +
+                            "           <label for=\"Hide_number\">Hide number</label>\n" + "<br>" +
+                    "  </form>\n" +
+                    "  <fieldset>\n" +
+                            "Hi" + delimeter + subStr[0]+
+                            "<br>" +
+                            "Base functions" + delimeter + subStr[2] +
+                            "<br>" +
+                            "IPPhone" + delimeter +  subStr[3] +
+                            "<br>" +
+                            "Custom alarm" + delimeter +  subStr[4] +
+                            "<br>" +
+                            "Hide number" + delimeter + subStr[5] +
+                            "<br>" +
+                    "  </fieldset>\n" +
+                    "</html>"
+            );
         }
 
     }
