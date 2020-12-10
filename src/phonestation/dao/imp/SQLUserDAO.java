@@ -65,7 +65,7 @@ public class SQLUserDAO implements UserDAO {
                 statement.close();
                 return "this login already exixts";
             }
-            statement.executeUpdate("INSERT users(login, password) VALUES ('"+ user.GetLogin() +"', '"+ user.GetPassword() +"')");
+            statement.executeUpdate("UPDATE users SET ");
             statement.close();
             return "sucessfull registration";
         }catch (SQLException e){
@@ -76,4 +76,32 @@ public class SQLUserDAO implements UserDAO {
             return null;
         }
     }
+
+    @Override
+    public User ChangeSubscribes(User user) throws DAOException {
+        try {
+            String url = "jdbc:mysql://localhost:3306/lab1_wt?serverTimezone=Europe/Moscow&useSSL=false";
+            String loginDB = "root";
+            String passwordDB = "root";
+            Class.forName("org.gjt.mm.mysql.Driver");
+            Connection connection = DriverManager.getConnection(url,loginDB,passwordDB);
+            Statement statement = connection.createStatement();
+            String sqlCommand = "UPDATE users SET baseFunctions = " + user.GetBaseFunctions() +", ipPhone = " + user.GetipPhone() + ", customAlarm = " + user.GetCustomAlarm() + ", hideNumber = " + user.GetHideNumber() + " WHERE login = '"+ user.GetLogin() +"';";
+            var check = statement.executeUpdate(sqlCommand);
+            if (check != 0){
+                return user;
+            }else{
+                return null;
+            }
+
+        }catch (SQLException e){
+            System.out.println("DB connection error");
+            return null;
+        }catch (ClassNotFoundException e){
+            System.out.println("Class register error");
+            return null;
+        }
+    }
+
+
 }

@@ -9,8 +9,7 @@ import javax.servlet.ServletException;
 
 import phonestation.controller.Controller;
 import phonestation.controller.factory.ControllerFactory;
-import phonestation.dao.factory.DAOFactory;
-import phonestation.GlobalVariables;
+
 
 import static phonestation.GlobalVariables.delimeter;
 
@@ -21,7 +20,7 @@ public class AutorizationController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        String command = "SIGN_IN " + login + " " + password;
+        String command = "SIGN_IN" + delimeter + login + delimeter + password;
         ControllerFactory controllerFactory = ControllerFactory.GetInstance();
         Controller controller = controllerFactory.GetController();
         String controllerResponce = controller.ExexuteTesk(command);
@@ -42,7 +41,9 @@ public class AutorizationController extends HttpServlet {
                     "  </fieldset>\n" +
                     "  <fieldset>\n" +
                     "  <form action=\"AccountController\" method=\"get\">\n" +
-                    "        <input type=\"submit\" value=\"Complete\">\n" + "<br>" +
+                            "<input type=\"text\" name=\"login\" value=\"\"><br>" +
+                            "enter password: <br>" +
+                            "<input type=\"password\" name=\"password\" value=\"\"><br>" +
                             "        <input type=\"checkbox\" name=\"Base_functions\" value=\"\"><br>\n" +
                             "           <label for=\"Base_functions\">Base functions</label>\n" + "<br>" +
                             "        <input type=\"checkbox\" name=\"IPPhone\" value=\"\"><br>\n" +
@@ -51,6 +52,7 @@ public class AutorizationController extends HttpServlet {
                             "           <label for=\"Custom_alarm\">Custom alarm</label>\n" + "<br>" +
                             "        <input type=\"checkbox\" name=\"Hide_number\" value=\"\"><br>\n" +
                             "           <label for=\"Hide_number\">Hide number</label>\n" + "<br>" +
+                            "        <input type=\"submit\" value=\"Complete\">\n" + "<br>" +
                     "  </form>\n" +
                     "  <fieldset>\n" +
                             "Hi" + delimeter + subStr[0]+

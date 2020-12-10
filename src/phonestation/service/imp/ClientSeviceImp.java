@@ -1,5 +1,6 @@
 package phonestation.service.imp;
 
+import phonestation.GlobalVariables;
 import phonestation.bean.User;
 import phonestation.dao.UserDAO;
 import phonestation.dao.factory.DAOFactory;
@@ -59,5 +60,25 @@ public class ClientSeviceImp implements ClientService {
         }catch (Exception e){
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public User ChangeSubscribe(String request) throws ServiceException{
+        User user = new User();
+        String[] subStr = request.split(GlobalVariables.delimeter);
+        user.SetLogin(subStr[0]);
+        user.SetPassword(subStr[1]);
+        user.SetBaseFunctions(subStr[2].equals("true")? true : false);
+        user.SetipPhone(subStr[3].equals("true")? true : false);
+        user.SetCustomAlarm(subStr[4].equals("true")? true : false);
+        user.SetHideNumber(subStr[5].equals("true")? true : false);
+        try {
+            DAOFactory daoObjectFactory = DAOFactory.GetInstance();
+            UserDAO userDAO = daoObjectFactory.GetUserDAO();
+            user = userDAO.ChangeSubscribes(user);
+        }catch (Exception e){
+            throw new ServiceException(e);
+        }
+        return user;
     }
 }

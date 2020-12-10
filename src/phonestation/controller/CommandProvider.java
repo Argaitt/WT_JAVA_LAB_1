@@ -1,6 +1,7 @@
 package phonestation.controller;
 
 import phonestation.controller.command.Command;
+import phonestation.controller.command.imp.ChangeSubscribe;
 import  phonestation.controller.command.imp.SingIn;
 import  phonestation.controller.command.imp.Registration;
 import  phonestation.controller.command.CommadName;
@@ -13,6 +14,7 @@ final class CommadProvider {
     CommadProvider(){
         repository.put(CommadName.SIGN_IN,new SingIn());
         repository.put(CommadName.REGISTRATION, new Registration());
+        repository.put(CommadName.CHANGE_SUBSCRIBE, new ChangeSubscribe());
     }
     Command GetCommand(String name){
         Command command = null;
