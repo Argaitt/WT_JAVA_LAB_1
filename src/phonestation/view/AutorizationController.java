@@ -28,8 +28,10 @@ public class AutorizationController extends HttpServlet {
         java.io.PrintWriter out = response.getWriter();
         if (controllerResponce == null){
             out.println("access denied");
-        }else {
-            String[] subStr = controllerResponce.split(delimeter);
+            return;
+        }
+        String[] subStr = controllerResponce.split(delimeter);
+        if (subStr[6].equals("false")){
             out.print(
                     "<html>\n" +
                     "  <head>\n" +
@@ -68,6 +70,27 @@ public class AutorizationController extends HttpServlet {
                     "  </fieldset>\n" +
                     "</html>"
             );
+        } else{
+            command = "GET_USER_DATABASE ";
+            String userDatabase = controller.ExexuteTesk(command);
+            out.println("Hellow administrator! Just BAN SOMEBODY MYHAHAHHAHAHHAHAHAH!!!!!!");
+            out.print(
+                    "<html>\n" +
+                    "  <head>\n" +
+                    "    <title>UrAccount</title>\n" +
+                    "  </head>\n"
+            );
+            String[] users = userDatabase.split("\n");
+            for (int i =0; i< users.length; i++){
+                String[] userData = users[i].split(delimeter);
+                out.println("<form action=\"AccountController\" method=\"get\">\n");
+                out.println("<Label"+ i +">" + userData[0] + delimeter + userData[1] + delimeter +userData[2] + delimeter +userData[3] + delimeter +userData[4] + delimeter + userData[5] + "</Label>");
+                out.println("<input type=\"submit\" name=\"Ban\" value=\"BAN\">");
+                out.println("</form>\n");
+            }
+            out.print("</html>"
+            );
+
         }
 
     }

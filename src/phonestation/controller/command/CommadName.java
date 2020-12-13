@@ -4,4 +4,5 @@ public class CommadName {
     public static final String SIGN_IN = "SIGN_IN";
     public static final String REGISTRATION = "REGISTRATION";
     public static final String CHANGE_SUBSCRIBE = "CHANGE_SUBSCRIBE";
+    public static final String GET_USER_DATABASE = "GET_USER_DATABASE";
 }

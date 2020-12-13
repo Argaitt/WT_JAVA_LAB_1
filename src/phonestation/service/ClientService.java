@@ -9,4 +9,5 @@ public interface ClientService {
     void SignOut(String login) throws ServiceException;
     void Registration(User user) throws ServiceException;
     User ChangeSubscribe(String reques) throws ServiceException;
+    String GetUsersDatabase() throws  ServiceException;
 }

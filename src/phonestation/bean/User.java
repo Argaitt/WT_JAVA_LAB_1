@@ -7,6 +7,7 @@ public class User {
     private boolean customAlarm;
     private boolean ipPhone;
     private boolean hideNumber;
+    private boolean isAdmin;
 
     public String GetLogin(){
         return login;
@@ -45,4 +46,7 @@ public class User {
 
     public boolean GetHideNumber(){ return hideNumber; }
     public  void SetHideNumber(boolean hideNumber){ this.hideNumber = hideNumber; }
+
+    public boolean GetIsAdmin(){ return isAdmin; }
+    public  void SetIsAdmin(boolean isAdmin){ this.isAdmin = isAdmin; }
 }

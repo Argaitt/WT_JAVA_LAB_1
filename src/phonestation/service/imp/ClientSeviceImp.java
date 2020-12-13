@@ -9,8 +9,11 @@ import phonestation.service.ClientService;
 import phonestation.service.exception.ServiceException;
 
 import java.util.regex.Pattern;
+import java.io.*;
+import java.util.*;
 
 public class ClientSeviceImp implements ClientService {
+    String delimiter = GlobalVariables.delimeter;
     @Override
     public User SignIn(String login, String password) throws ServiceException{
         if (login == null || login.isEmpty()){
@@ -81,4 +84,23 @@ public class ClientSeviceImp implements ClientService {
         }
         return user;
     }
+
+    @Override
+    public String GetUsersDatabase() throws ServiceException {
+        ArrayList<User> users;
+        String usersStr ="";
+        try {
+            DAOFactory daoFactory = DAOFactory.GetInstance();
+            UserDAO userDAO = daoFactory.GetUserDAO();
+            users = userDAO.GetUsersDatabase();
+            for (User user: users) {
+                usersStr += user.GetLogin() + delimiter + user.GetPassword() + delimiter + user.GetBaseFunctions() + delimiter +
+                        user.GetipPhone() + delimiter + user.GetCustomAlarm() + delimiter + user.GetHideNumber() + delimiter + user.GetIsAdmin() +"\n";
+            }
+        }catch (Exception e){
+            throw  new ServiceException(e);
+        }
+        return usersStr;
+    }
+
 }

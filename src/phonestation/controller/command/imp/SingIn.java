@@ -24,7 +24,7 @@ public class SingIn implements Command {
                 response = null;
             }else {
                 response = user.GetLogin() + delimiter + user.GetPassword() + delimiter + user.GetBaseFunctions() + delimiter +
-                        user.GetipPhone() + delimiter + user.GetCustomAlarm() + delimiter + user.GetHideNumber();
+                        user.GetipPhone() + delimiter + user.GetCustomAlarm() + delimiter + user.GetHideNumber() + delimiter + user.GetIsAdmin();
             }
         }catch (ServiceException e){
             response = "error during login procedure";

@@ -8,6 +8,7 @@ import java.sql.*;
 import java.nio.file.*;
 import java.io.*;
 import java.util.*;
+import java.lang.Exception;
 
 public class SQLUserDAO implements UserDAO {
     @Override
@@ -33,6 +34,7 @@ public class SQLUserDAO implements UserDAO {
                 user.SetCustomAlarm(resultSet.getBoolean("customAlarm"));
                 user.SetHideNumber(resultSet.getBoolean("hideNumber"));
                 user.SetipPhone(resultSet.getBoolean("ipPhone"));
+                user.SetIsAdmin(resultSet.getBoolean("isAdmin"));
                 statement.close();
                 return user;
             }
@@ -101,6 +103,43 @@ public class SQLUserDAO implements UserDAO {
             System.out.println("Class register error");
             return null;
         }
+    }
+
+    @Override
+    public ArrayList<User> GetUsersDatabase() throws DAOException {
+        User user = new User();
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            String url = "jdbc:mysql://localhost:3306/lab1_wt?serverTimezone=Europe/Moscow&useSSL=false";
+            String loginDB = "root";
+            String passwordDB = "root";
+            Class.forName("org.gjt.mm.mysql.Driver");
+            Connection connection = DriverManager.getConnection(url,loginDB,passwordDB);
+            Statement statement = connection.createStatement();
+            String sqlCommand = "SELECT * FROM users";
+
+
+            ResultSet resultSet = statement.executeQuery(sqlCommand);
+            while (resultSet.next()){
+                if (!resultSet.getBoolean("isAdmin")) {
+                    user = new User();
+                    user.SetLogin(resultSet.getString("login"));
+                    user.SetPassword(resultSet.getString("password"));
+                    user.SetBaseFunctions(resultSet.getBoolean("baseFunctions"));
+                    user.SetCustomAlarm(resultSet.getBoolean("customAlarm"));
+                    user.SetHideNumber(resultSet.getBoolean("hideNumber"));
+                    user.SetipPhone(resultSet.getBoolean("ipPhone"));
+                    user.SetIsAdmin(resultSet.getBoolean("isAdmin"));
+                    users.add(user);
+                }
+            }
+            statement.close();
+        }catch (ClassNotFoundException e){
+            throw new DAOException(e);
+        }catch (SQLException e){
+            throw new DAOException(e);
+        }
+        return users;
     }
 
 
